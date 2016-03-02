@@ -112,24 +112,24 @@ public class Machine {
     }
 
     private void step(){
+        String pointer = "";
+        for (int i = 0; i < position; i++) {
+            pointer += " ";
+        }
         System.out.println("Step " + ++step + ":");
         char currentSymbol = command[position];
         String currentState =  state.toString() + currentSymbol;
         String nextState = rules.get(currentState);
-        System.out.println("nextState = " + nextState);
+        System.out.println("rule: q" + currentState + " -> q" + nextState);
         command[position] = nextState.charAt(1);
         char buf = nextState.charAt(0);
         state = ((int) buf) - 48;
         if (nextState.charAt(2) == 'r') position++;
         else position--;
         System.out.println(command);
-        String pointer = "";
-        for (int i = 0; i < position - 1; i++) {
-            pointer += " ";
-        }
         pointer += "|";
         System.out.println(pointer);
-        System.out.println("rule: q" + currentState + " -> q" + nextState);
+        System.out.println("nextState = " + nextState);
         System.out.println();
 
         if (state == 0){
